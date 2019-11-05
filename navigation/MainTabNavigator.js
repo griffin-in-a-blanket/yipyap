@@ -2,75 +2,87 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import TrendingScreen from '../screens/TrendingScreen';
+import TerritoryScreen from '../screens/TerritoryScreen';
+import UserScreen from '../screens/UserScreen';
+import { Ionicons } from '@expo/vector-icons';
+
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
 });
 
-const HomeStack = createStackNavigator(
+const Home = createStackNavigator(
   {
     Home: HomeScreen,
   },
   config
 );
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
+Home.path = '';
 
-HomeStack.path = '';
-
-const LinksStack = createStackNavigator(
+const Trending = createStackNavigator(
   {
-    Links: LinksScreen,
+    Trending: TrendingScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
-};
+Trending.path = '';
 
-LinksStack.path = '';
-
-const SettingsStack = createStackNavigator(
+const Territory = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Territory: TerritoryScreen,
   },
   config
 );
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
-};
+Territory.path = '';
 
-SettingsStack.path = '';
+const User = createStackNavigator(
+  {
+    User: UserScreen,
+  },
+  config
+);
+
+User.path = '';
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
+  Home,
+  Trending,
+  Territory,
+  User,
+},
+{
+  defaultNavigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ tintColor }) => {
+      const { routeName } = navigation.state
+      let IconComponent = Ionicons
+      let iconName
+      if ( routeName === 'Home') {
+        iconName = Platform.OS === 'ios' ? 'ios-home' : 'md-home'
+      } else if ( routeName === 'Trending') {
+        iconName = Platform.OS === 'ios' ? 'ios-flame' : 'md-flame'
+      } else if ( routeName === 'Territory') {
+        iconName = Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'
+      } else if ( routeName === 'User') {
+        iconName = Platform.OS === 'ios' ? 'ios-person' : 'md-person'
+      }
+
+      return <IconComponent size = {25} name = { iconName } color = { tintColor } />
+    }
+  }),
+  tabBarOptions: {
+    activeTintColor: '#f1ad70',
+    inactiveTintColor: '#aaa',
+    labelStyle: {
+      fontSize: 12,
+      fontWeight: 'bold'
+    }
+  }
 });
 
 tabNavigator.path = '';
