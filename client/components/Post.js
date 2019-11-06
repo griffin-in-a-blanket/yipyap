@@ -27,12 +27,13 @@ const styles = StyleSheet.create({
 
   vote: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 
   post: {
     flex: 5,
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
 
   title: {
