@@ -1,11 +1,12 @@
-import React from 'react'
-import { Post } from '../components'
+import React from "react"
+import { Post, NewPost } from "../components"
 
 export default HomeScreen = () => {
-  return (
-    <>
-      <Post />
-      <Post />
-    </>
-  );
+	return (
+		<>
+			<Post />
+			<Post />
+			<NewPost />
+		</>
+	)
 }
