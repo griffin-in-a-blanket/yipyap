@@ -2,23 +2,28 @@ import React from "react"
 import { StyleSheet, View, Text } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
 
-export default Post = () => (
-	<View style={styles.postContainer}>
-		<View style={styles.vote}>
-			<Ionicons size={26} name="ios-arrow-up" />
-			<Text style={styles.content}>0</Text>
-			<Ionicons size={26} name="ios-arrow-down" />
-		</View>
-		<View style={styles.post}>
-			<Text style={styles.title}>Lorem ipsum dolor sit amet</Text>
-			<Text style={styles.content}>
-				consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-				et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-				exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-			</Text>
-		</View>
-	</View>
-)
+
+export default Post = ({ post }) => {
+  const { title, content, upvote, downvote, author} = post
+  const voteTotal = upvote - downvote
+    
+  return (
+    <View style={styles.postContainer}>
+      <View style={styles.vote}>
+        <Ionicons size={26} name="ios-arrow-up" />
+          <Text style={styles.content}>{ voteTotal }</Text>
+        <Ionicons size={26} name="ios-arrow-down" />
+      </View>
+
+      <View style={styles.post}>
+        <Text style={styles.title}>{ title }</Text>
+        <Text>by { author }</Text>
+
+        <Text style={styles.content}>{ content }</Text>
+      </View>
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
 	allPosts: {
@@ -32,6 +37,7 @@ const styles = StyleSheet.create({
 	vote: {
 		flex: 1,
 		flexDirection: "column",
+		alignItems: "center"
 	},
 
 	post: {
@@ -40,7 +46,7 @@ const styles = StyleSheet.create({
 	},
 
 	title: {
-		fontSize: 40,
+		fontSize: 25,
 		fontWeight: "bold",
 	},
 
