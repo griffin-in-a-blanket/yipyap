@@ -2,6 +2,7 @@ import React from "react"
 import { StyleSheet, View, Text } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
 
+
 export default Post = ({ post }) => {
   const { title, content, upvote, downvote, author} = post
   const voteTotal = upvote - downvote
