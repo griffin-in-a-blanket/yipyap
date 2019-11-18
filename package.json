@@ -5,8 +5,15 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "eject": "expo eject",
     "test": "jest --watchAll"
+  },
+  "lint-staged": {
+    "*.{js,jsx,css,scss,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "jest": {
     "preset": "jest-expo"
@@ -30,7 +37,8 @@
   },
   "devDependencies": {
     "babel-preset-expo": "^7.0.0",
-    "jest-expo": "^35.0.0"
+    "jest-expo": "^35.0.0",
+    "prettier": "^1.19.1"
   },
   "private": true
 }
